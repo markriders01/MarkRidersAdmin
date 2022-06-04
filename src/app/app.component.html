@@ -1,0 +1,110 @@
+<mat-toolbar *ngIf="visible" color="#0a1857" class="style_toolbar" [ngStyle]="{ display: screenWidth > 840 ? 'none' : 'flex' }">
+  <button mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div class="algin-center">
+    <img src="assets/img/icon/macriders/mrlogo.png">
+  </div>
+</mat-toolbar>
+
+<mat-sidenav-container  class="pawa2_u_sidebar_outter" autosize>
+  <mat-sidenav  [ngClass]="smallNavMenu ? 'smallNavMenu' : ''" *ngIf="visible" class="pawa2_u_sidebar_inner" #sidenav mode="side" [opened]="screenWidth && screenWidth > 840 ? 'true' : 'false'" [mode]="(screenWidth > 840) ? 'side' : 'over'" >
+    <div class="pawa2_u_sidebar_inner" style="position: relative; max-height: 100vh;" [perfectScrollbar]="config" >
+      <div class="pawa2_u_sidebar_inner_top">
+        <div class="container small_border">
+          <div class="row" *ngIf="smallNavMenu == false">
+
+            <div class="col-md-2 col-2 pd-0" style="padding: 0;">
+              <div class="small_broder_logo">
+                <img src="assets/img/icon/macriders/mrlogo.png">
+              </div>
+            </div>
+
+            <div class="col-md-7 col-7">
+              <div class="pawa2_u_sidebar_text_1">
+               Mark Riders
+              </div>
+              <div class="pawa2_u_sidebar_text_2">
+                <a [routerLink]="['/edit-profile']"> Edit Profile </a>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-2 line-37">
+              <div class="toggle_sidemenu_btn text-center">
+                <button class="toggle_btn" (click)="smallNav()" matRipple [matRippleColor]="'white'">
+                  <img src="assets/img/icon/arrow_right_circle.svg">
+                </button>
+              </div>
+            </div>
+
+          </div>
+          <div class="row" *ngIf="smallNavMenu == true">
+            <div class="col-md-12 col-12 pd-0" style="padding: 0; text-align: center;">
+              <div class="small_broder_logo">
+                <img src="assets/img/icon/macriders/mrlogo.png">
+              </div>
+            </div>
+
+            <div class="col-md-12 col-12 mt-5 text-center" *ngIf="smallNavMenu == true">
+              <div class="toggle_sidemenu_btn">
+                <button class="toggle_btn" (click)="smallNav()" matRipple [matRippleColor]="'white'">
+                  <span class="mdi mdi-arrow-expand-all" style="font-size: 21px;"></span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+      <div class="pawa2_u_sidebar_inner_item_links">
+
+        <li><a [routerLink]="['/dashboard']" class="pawa2_u_sidebar_inner_item_link_inner" routerLinkActive="active" (click)="closeSideNav(sidenav);"  matRipple><img src="assets/img/icon/menu_icon.svg"><span class="link_text">Dashboard</span></a></li>
+        <li><a [routerLink]="['/admin-accounts']" class="pawa2_u_sidebar_inner_item_link_inner" routerLinkActive="active" (click)="closeSideNav(sidenav);" matRipple><img src="assets/img/icon/user_icon.svg"><span class="link_text">Admin User Managment</span></a></li>
+        <li><a [routerLink]="['/user-management']" class="pawa2_u_sidebar_inner_item_link_inner" routerLinkActive="active" (click)="closeSideNav(sidenav);" matRipple><img src="assets/img/icon/user_icon.svg"><span class="link_text">User Managment</span></a></li>
+        <li><a [routerLink]="['/rider-management']" class="pawa2_u_sidebar_inner_item_link_inner" routerLinkActive="active" (click)="closeSideNav(sidenav);" matRipple><img src="assets/img/icon/vendor_icon.svg"><span class="link_text">Rider Managment</span></a></li>
+
+        <!-- <li appExpandMenu>
+          <a class="pawa2_u_sidebar_inner_item_link_inner" routerLinkActive="active" matRipple><img src="assets/img/icon/category.svg"><span class="link_text">Category </span></a>
+          <ul class="sub-menu">
+            <li><a [routerLink]="['/category']"  class="pawa2_u_sidebar_inner_item_link_inner" routerLinkActive="active" (click)="closeSideNav(sidenav);" matRipple><img src="assets/img/icon/circle-double.svg"><span class="link_text">All </span></a> </li>
+            <li><a [routerLink]="['/category/create']"  class="pawa2_u_sidebar_inner_item_link_inner" routerLinkActive="active" (click)="closeSideNav(sidenav);" matRipple><img src="assets/img/icon/circle-double.svg"><span class="link_text">Add new </span></a> </li>
+            <li><a [routerLink]="['/category-type']"  class="pawa2_u_sidebar_inner_item_link_inner" routerLinkActive="active" (click)="closeSideNav(sidenav);" matRipple><img src="assets/img/icon/circle-double.svg"><span class="link_text">Category Type </span></a> </li>
+            <li><a [routerLink]="['/category-pricing-list']"  class="pawa2_u_sidebar_inner_item_link_inner" routerLinkActive="active" (click)="closeSideNav(sidenav);" matRipple><img src="assets/img/icon/circle-double.svg"><span class="link_text">Category Pricing Style </span></a> </li>
+            <li><a [routerLink]="['/order-flow']"  class="pawa2_u_sidebar_inner_item_link_inner" routerLinkActive="active" (click)="closeSideNav(sidenav);" matRipple><img src="assets/img/icon/circle-double.svg"><span class="link_text">Order Flow </span></a> </li>
+            <li><a [routerLink]="['/macfeeuptype']"  class="pawa2_u_sidebar_inner_item_link_inner" routerLinkActive="active" (click)="closeSideNav(sidenav);" matRipple><img src="assets/img/icon/circle-double.svg"><span class="link_text">Mac Up Fee Types </span></a> </li>
+          </ul>
+        </li> -->
+
+        <li><a [routerLink]="['/deliveries']" class="pawa2_u_sidebar_inner_item_link_inner" routerLinkActive="active" (click)="closeSideNav(sidenav);" matRipple><img src="assets/img/icon/prod_n_cat_icon.svg"><span class="link_text">Deliveries </span></a></li>
+        <li><a [routerLink]="['/messages']" class="pawa2_u_sidebar_inner_item_link_inner" routerLinkActive="active" (click)="closeSideNav(sidenav);" matRipple><img src="assets/img/icon/message_icon.svg"><span class="link_text">Message</span></a></li>
+        <li><a [routerLink]="['/transactions']" class="pawa2_u_sidebar_inner_item_link_inner" routerLinkActive="active" (click)="closeSideNav(sidenav);" matRipple><img src="assets/img/icon/transactions.svg"><span class="link_text">Transactions</span></a></li>
+        <li><a [routerLink]="['/dispute']" class="pawa2_u_sidebar_inner_item_link_inner" routerLinkActive="active" (click)="closeSideNav(sidenav);" matRipple><img src="assets/img/icon/disputes.svg"><span class="link_text">Disputes</span> </a></li>
+        <!-- <li><a [routerLink]="['/report']" class="pawa2_u_sidebar_inner_item_link_inner" routerLinkActive="active" (click)="closeSideNav(sidenav);" matRipple><img src="assets/img/icon/reports.svg"><span class="link_text">Reports</span></a></li> -->
+      </div>
+
+
+      <div class="pawa2_u_sidebar_inner_item_links border_bottom">
+        <li><a [routerLink]="['/approval-log']" class="pawa2_u_sidebar_inner_item_link_inner" routerLinkActive="active" (click)="closeSideNav(sidenav);" matRipple><img src="assets/img/icon/money_icon.svg"><span class="link_text">Approval Log</span></a></li>
+        <li><a [routerLink]="['/approval-log']" class="pawa2_u_sidebar_inner_item_link_inner" routerLinkActive="active" (click)="closeSideNav(sidenav);" matRipple><img src="assets/img/icon/money_icon.svg"><span class="link_text">Notifications</span></a></li>
+        <li><a [routerLink]="['/settings']" class="pawa2_u_sidebar_inner_item_link_inner" routerLinkActive="active" (click)="closeSideNav(sidenav);" matRipple><img src="assets/img/icon/gear_icon.svg"><span class="link_text">Settings</span></a></li>
+      </div>
+
+
+      <div class="hadle_signout_btn matRipple" (click)="closeSideNav(sidenav); logOut()">
+        <img src="assets/img/icon/log_out.svg">
+        <span class="link_text"> Sign out </span>
+      </div>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="pawa2_u_dashboard">
+     <router-outlet style="position: relative;"></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

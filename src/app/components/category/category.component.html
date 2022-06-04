@@ -1,0 +1,159 @@
+<div class="pawa2_u_dashboard">
+  <div class="pawa2_u_dashboard_section_1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-xs-6 col-sm-6 col-6">
+          <div class="pawa2_u_dash_title">
+            Category
+          </div>
+        </div>
+        <div class="col-md-6 col-xs-6 col-sm-6 col-6 text-right">
+
+          <button class="show_top_menu_bar" mat-button (click)="gotoCreateCategory()">
+            <span span>Create a new </span>
+            <span class="mdi mdi-chevron-down change_position"></span>
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pawa2_u_dashbaord_section_2">
+    <div class="container">
+      <div class="row">
+
+        <div class="item_counters col-md-12 mb-5">
+          <div class="row">
+
+            <div class="col-md-3">
+              <div class="item_counter_list pink">
+                <div class="item_counter_title">
+                  Category Count
+                </div>
+                <div class="item_counter_title_price">
+                  {{this.categories?.length}}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="the_selection_bar col-md-12">
+          <div class="row">
+            <div class="col-md-5">
+              <button class="the_sort_header_date" mat-button [matMenuTriggerFor]="sort_date">{{ this.menu_title}} <span class="mdi mdi-chevron-down change_position_2"></span> </button>
+                  <mat-menu #sort_date="matMenu">
+                    <button mat-menu-item (click)="bulkAction('Bulk Edit', 'bulk_edit')"> Bulk Edit </button>
+                    <button mat-menu-item (click)="bulkAction('Delete', 'bulk_delete')"> Delete </button>
+                    </mat-menu>
+            </div>
+            <div class="col-md-7">
+              <div class="row">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-10">
+                  <form>
+                    <div class="row padding_top_small_screen">
+                      <div class="col-md-7 col-7">
+                        <input type="text" class="form-control style_2" placeholder="Search name, email, phone id.">
+                      </div>
+                      <div class="col-md-5 col-5 shift_big_screen">
+                        <button class="btn btn-small btn-primary the_action_btn">Search</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="handle_form_list table-responsive main_tb">
+            <mat-table matTableResponsive class="handle_form_table_list col-md-12 table-responsive table " [dataSource]="dataSource" matSort>
+
+
+              <!-- Checkbox Column -->
+              <ng-container matColumnDef="select">
+               <mat-header-cell *matHeaderCellDef>
+                 <mat-checkbox (change)="$event ? masterToggle() : null"
+                               [checked]="selection.hasValue() && isAllSelected()"
+                               [indeterminate]="selection.hasValue() && !isAllSelected()"
+                               [aria-label]="checkboxLabel()">
+                 </mat-checkbox>
+               </mat-header-cell>
+               <mat-cell *matCellDef="let row">
+                 <mat-checkbox (click)="$event.stopPropagation()"
+                               (change)="$event ? selection.toggle(row) : null"
+                               [checked]="selection.isSelected(row)"
+                               [aria-label]="checkboxLabel(row)">
+                 </mat-checkbox>
+               </mat-cell>
+             </ng-container>
+
+
+                <!-- status Column -->
+                <ng-container matColumnDef="name" >
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                   <mat-cell *matCellDef="let element"> {{element?.categoryName}} </mat-cell>
+                </ng-container>
+
+                <!-- Amount Column -->
+                <ng-container matColumnDef="type">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element?.categoryTypeName}} </mat-cell>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="description">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element?.categoryDescription}} </mat-cell>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="order_flow">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Order Flow </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element?.orderFlowName}} </mat-cell>
+                </ng-container>
+
+
+                <ng-container matColumnDef="edit">
+                  <mat-header-cell *matHeaderCellDef>Actions </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+
+                    <button (click)="runAction('edit', row.id)" mat-icon-button matTooltip="Click to Edit" class="btn btn-small custom_btn btn-green-color">
+                      Edit
+                  </button>
+
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="delete">
+                  <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+
+                    <button (click)="runAction('delete', row.id)"  mat-icon-button matTooltip="Click to Edit" class="btn btn-small custom_btn btn-red-color">
+                      Delete
+                    </button>
+
+                  </mat-cell>
+                </ng-container>
+                           <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+            </mat-table>
+
+            <mat-paginator class="mat-paginator-container-pg" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons>
+            </mat-paginator>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

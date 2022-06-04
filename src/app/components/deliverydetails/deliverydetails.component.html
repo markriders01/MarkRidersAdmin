@@ -1,0 +1,146 @@
+<div class="pawa2_u_dashboard">
+    <div class="pawa2_u_dashboard_section_1">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-xs-6 col-sm-6 col-6">
+            <div class="pawa2_u_dash_title">
+              Deliveries
+            </div>
+          </div>
+          <div class="col-md-6 col-xs-6 col-sm-6 col-6 text-right">
+            <app-quick-menu-component></app-quick-menu-component>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pawa2_u_dashbaord_section_2">
+      <div class="container">
+        <div class="row">
+  
+          <div class="item_counters col-md-12 mb-5">
+            <div class="row">
+  
+              <div class="col-md-3">
+                <div class="item_counter_list pink">
+                  <div class="item_counter_title">
+                    Delivery Count
+                  </div>
+                  <div class="item_counter_title_price">
+                    {{this.deliveryCount}}
+                  </div>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+  
+  
+          <div class="the_selection_bar col-md-12">
+            <div class="row">
+              <div class="col-md-5">
+                <button class="the_sort_header_date" mat-button [matMenuTriggerFor]="sort_date">{{ this.menuTitle}} <span class="mdi mdi-chevron-down change_position_2"></span> </button>
+                    <mat-menu #sort_date="matMenu">
+                      <button mat-menu-item (click)="bulkAction('Bulk Edit', 'bulk_edit')"> Bulk Edit </button>
+                      <button mat-menu-item (click)="bulkAction('Delete', 'bulk_delete')"> Delete </button>
+                      </mat-menu>
+              </div>
+              <div class="col-md-7">
+                <div class="row">
+                  <div class="col-md-2">
+  
+                  </div>
+                  <div class="col-md-10">
+                    <form>
+                      <div class="row padding_top_small_screen">
+                        <div class="col-md-7 col-7">
+                          <input type="text" class="form-control style_2" placeholder="Search delivery no,email.">
+                        </div>
+                        <div class="col-md-5 col-5 shift_big_screen">
+                          <button class="btn btn-small btn-primary the_action_btn">Search</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-md-12">
+            <div class="handle_form_list table-responsive main_tb">
+              <mat-table matTableResponsive class="handle_form_table_list col-md-12 table-responsive table " [dataSource]="dataSource" matSort>
+  
+  
+                <!-- Checkbox Column -->
+                <ng-container matColumnDef="select">
+                 <mat-header-cell *matHeaderCellDef>
+                   <mat-checkbox (change)="$event ? masterToggle() : null"
+                                 [checked]="selection.hasValue() && isAllSelected()"
+                                 [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                 [aria-label]="checkboxLabel()">
+                   </mat-checkbox>
+                 </mat-header-cell>
+                 <mat-cell *matCellDef="let row">
+                   <mat-checkbox (click)="$event.stopPropagation()"
+                                 (change)="$event ? selection.toggle(row) : null"
+                                 [checked]="selection.isSelected(row)"
+                                 [aria-label]="checkboxLabel(row)">
+                   </mat-checkbox>
+                 </mat-cell>
+               </ng-container>
+               <!-- email Column -->
+               <ng-container matColumnDef="email" >
+                <mat-header-cell *matHeaderCellDef mat-sort-header> User Email Address </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.deliveries.email}} </mat-cell>
+              </ng-container>
+
+               <!-- delivery Number Column -->
+               <ng-container matColumnDef="deliveryNo" >
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Delivery No </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.deliveries.deliveryNo}} </mat-cell>
+              </ng-container>
+  
+                  <!-- amount Column -->
+                  <ng-container matColumnDef="deliveryAmount" >
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Delivery Amount </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.deliveryAmount | currency:'₦':true:'3.2-2'}} </mat-cell>
+                  </ng-container>
+
+                   <!-- pickup Column -->
+                   <ng-container matColumnDef="pickup">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> PickUp Address </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.deliveries.deliveryItems[0].deliveryLocation.baseAddress}} </mat-cell>
+                  </ng-container>
+                   <!-- dropoff Column -->
+                   <ng-container matColumnDef="dropoff">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Drop-Off Address </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.deliveries.deliveryItems[0].deliveryLocation.targetAddress}} </mat-cell>
+                  </ng-container>
+
+  
+                  <!-- Status Column -->
+                  <ng-container matColumnDef="deliverystatus">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Delivery Status </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.deliverystatus}} </mat-cell>
+                  </ng-container>
+
+                  <!-- Date Column -->
+                  <ng-container matColumnDef="dateCreated">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Date </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.dateCreated | date}} </mat-cell>
+                  </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+  
+              <mat-paginator class="mat-paginator-container-pg" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons>
+              </mat-paginator>
+            </div>
+          </div>
+  
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  

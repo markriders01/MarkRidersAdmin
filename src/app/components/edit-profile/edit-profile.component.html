@@ -1,0 +1,116 @@
+<div class="pawa2_u_dashboard">
+  <div class="pawa2_u_dashboard_section_1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-xs-6 col-sm-6 col-6">
+          <div class="pawa2_u_dash_title">
+            Edit Profile
+          </div>
+        </div>
+        <div class="col-md-6 col-xs-6 col-sm-6 col-6 text-right">
+          <app-quick-menu-component></app-quick-menu-component>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pawa2_u_dashbaord_section_style_2">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-12">
+          <form [formGroup]="formData" (ngSubmit)="formData.valid && submitForm()">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <input class="form-control form_styler" placeholder="First name" formControlName="firstName">
+
+                    <div class="validate_input" *ngIf="formData.get('firstName').hasError('required') && formData.get('firstName').touched">
+                      First name is required
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-6 mb-4">
+                    <input class="form-control form_styler" placeholder="Last name" formControlName="lastName">
+
+                    <div class="validate_input" *ngIf="formData.get('lastName').hasError('required') && formData.get('lastName').touched">
+                      Last name is required
+                    </div>
+                  </div>
+
+                  <div class="col-md-12 mb-4">
+                    <input class="form-control form_styler" type="email" placeholder="email" formControlName="email" readonly>
+                    <div class="validate_input" *ngIf="formData.get('email').hasError('required') && formData.get('email').touched">
+                      Email is required
+                    </div>
+                  </div>
+
+                  <div class="col-md-12 mb-4">
+                    <input class="form-control form_styler" type="text" placeholder="Phone" formControlName="phoneNumber">
+                    <div class="validate_input" *ngIf="formData.get('phoneNumber').hasError('required') && formData.get('phoneNumber').touched">
+                      Phone is required
+                    </div>
+                  </div>
+
+                  <div class="col-md-12 mb-4">
+                    <input class="form-control form_styler" type="text" placeholder="Address" formControlName="address">
+                    <div class="validate_input" *ngIf="formData.get('address').hasError('required') && formData.get('address').touched">
+                      Address is required
+                    </div>
+                  </div>
+
+                  <!-- <div class="col-md-6 mb-4">
+                    <input class="form-control form_styler" placeholder="New Password" type="password" formControlName="password">
+                  </div> -->
+
+                  <div class="col-md-6 mb-4">
+
+                  </div>
+                  <!-- <div class="col-md-12 mb-4">
+                    <div class="user_profile_img">
+                      <img src="../../../assets/img/pofile_photo_1.png" alt="User profile image">
+                    </div>
+                    <div class="user_profile_img_text" (click)="changeProfilePicture()">
+                      change profile photo
+                    </div>
+                  </div> -->
+
+                  <!-- <div class="col-md-12 mb-4"  *ngIf="toggle_change_action == true">
+                    <label class="label_ctr">Profile picture</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input  formControlName="profile_image" type="file" class="custom-file-input" id="inputGroupFile01"
+                          aria-describedby="inputGroupFileAddon01">
+                        <label class="custom-file-label label_ctr_file" for="inputGroupFile01">Select Image</label>
+                      </div>
+                    </div>
+                  </div> -->
+
+
+                  <div class="col-md-12">
+                    <button class="btn btn-small save_btn" [disabled]="formData.invalid || loadingRequest == true">
+                      <div *ngIf="loadingRequest == false; else spinner">
+                       Update Information
+                      </div>
+
+                      <ng-template #spinner>
+                        <mat-spinner [diameter]="27" class="spinner_loader"></mat-spinner>
+                      </ng-template>
+                    </button>
+
+
+                  </div>
+
+                </div>
+                <div class="col-md-4">
+
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

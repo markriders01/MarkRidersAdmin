@@ -1,0 +1,100 @@
+<h2 mat-dialog-title>Edit User</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="col-md-12">
+    <form [formGroup]="formData" (ngSubmit)="formData.valid && submitForm()">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <input class="form-control form_styler" placeholder="First name" formControlName="firstName">
+
+              <div class="validate_input" *ngIf="formData.get('firstName').hasError('required') && formData.get('firstName').touched">
+                First name is required
+              </div>
+
+            </div>
+
+            <div class="col-md-6 mb-4">
+              <input class="form-control form_styler" placeholder="Last name" formControlName="lastName">
+
+              <div class="validate_input" *ngIf="formData.get('lastName').hasError('required') && formData.get('lastName').touched">
+                Last name is required
+              </div>
+            </div>
+
+            <div class="col-md-12 mb-4">
+              <input class="form-control form_styler" type="email" placeholder="email" formControlName="email" readonly>
+              <div class="validate_input" *ngIf="formData.get('email').hasError('required') && formData.get('email').touched">
+                Email is required
+              </div>
+            </div>
+
+            <div class="col-md-12 mb-4">
+              <input class="form-control form_styler" type="text" placeholder="phoneNumber" formControlName="phoneNumber">
+              <div class="validate_input" *ngIf="formData.get('phoneNumber').hasError('required') && formData.get('phoneNumber').touched">
+                Phone is required
+              </div>
+            </div>
+
+            <div class="col-md-12 mb-4">
+              <input class="form-control form_styler" type="text" placeholder="Address" formControlName="address">
+              <div class="validate_input" *ngIf="formData.get('address').hasError('required') && formData.get('address').touched">
+                Address is required
+              </div>
+            </div>
+<!-- 
+            <div class="col-md-6 mb-4">
+              <input class="form-control form_styler" placeholder="New Password" type="password" formControlName="password">
+            </div> -->
+
+            <div class="col-md-6 mb-4">
+
+            </div>
+            <!-- <div class="col-md-12 mb-4">
+              <div class="user_profile_img">
+                <img [src]="createImgPath(data.avatar)" alt="User profile image" style="height: 100px; width: 100px;">
+
+              </div >
+              <div class="user_profile_img_text" (click)="changeProfilePicture()">
+                change profile photo
+              </div>
+            </div> -->
+
+            <!-- <div class="col-md-12 mb-4"  *ngIf="toggle_change_action == true">
+              <label class="label_ctr">Profile picture</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input  type="file" #file class="custom-file-input" (change)= "uploadfile(file.files)"
+                    aria-describedby="inputGroupFileAddon01">
+                    <input type ="hidden" />
+                  <label class="custom-file-label label_ctr_file" for="inputGroupFile01">Select Image</label>
+                </div>
+              </div>
+            </div> -->
+
+
+            <div class="col-md-12">
+              <button class="btn btn-small save_btn" [disabled]="formData.invalid || loadingRequest == true">
+                <div *ngIf="loadingRequest == false; else spinner">
+                  Update User
+                </div>
+
+                <ng-template #spinner>
+                  <mat-spinner [diameter]="27" class="spinner_loader"></mat-spinner>
+                </ng-template>
+              </button>
+
+
+            </div>
+
+          </div>
+          <div class="col-md-4">
+
+          </div>
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+</mat-dialog-content>

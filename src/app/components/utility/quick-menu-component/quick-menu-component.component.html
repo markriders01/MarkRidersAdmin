@@ -1,0 +1,20 @@
+<button class="show_top_menu_bar" mat-button [matMenuTriggerFor]="menu" #t="matMenuTrigger">
+  <span span>Create a new </span>
+  <span class="mdi mdi-chevron-down change_position"></span>
+</button>
+
+<mat-menu #menu="matMenu" class="top_nav-menu_drop_down">
+  <button mat-menu-item (click)="gotoLink('dashboard')">Dashboard</button>
+  <button mat-menu-item (click)="gotoLink('rider-management')">Riders</button>
+  <button mat-menu-item (click)="gotoLink('user-management')">Users</button>
+  <button mat-menu-item (click)="gotoLink('admin-accounts')">Admin Users</button>
+  <button mat-menu-item (click)="gotoLink('deliveries')">Deliveries</button>
+  <button mat-menu-item (click)="gotoLink('create-admin-account')">Add Admin Account</button>
+  <!-- <button mat-menu-item (click)="gotoLink('vendor-management/create')">Riders</button> -->
+  <button mat-menu-item (click)="gotoLink('product/create')">Disputed Rides</button>
+  <button mat-menu-item (click)="gotoLink('edit-profile')">Edit Profile</button>
+  <div class="menu_dropdown_section_2">
+    <button mat-menu-item (click) ="gotoLink('settings')"><span class="mdi mdi-cog-outline change_position_2"></span> Settings </button>
+    <button mat-menu-item (click)="singOut()"><span class="mdi mdi-logout-variant change_position_2"></span> Sign Out</button>
+  </div>
+</mat-menu>

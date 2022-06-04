@@ -1,0 +1,117 @@
+<div class="pawa2_u_dashboard">
+  <div class="pawa2_u_dashboard_section_1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-xs-6 col-sm-6 col-6">
+          <div class="pawa2_u_dash_title">
+            Vendor Profile
+          </div>
+        </div>
+        <div class="col-md-6 col-xs-6 col-sm-6 col-6 text-right">
+          <app-quick-menu-component></app-quick-menu-component>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pawa2_u_dashbaord_section_2">
+    <div class="container">
+    <div class="row">
+        <!-- Edit Profile -->
+    <div class="col-md-4 border-right border-secondary ">
+      <div class="d-block p-3 text-center bg-light "><img class="d-block mx-auto mb-3" [src]="createImgPath(vendor?.avatar)" width="250"  /> 
+      <p class="pawa2_u_dash_title"> {{vendor?.businessName}} </p>
+      </div>
+      <hr class="">
+      <div class="d-block p-3 mb-4 bg-white border border-light" >
+        <h6 class="my-0">Name</h6>
+      <p class="text-muted">{{vendor?.businessName}}</p>
+      <h6 class="my-0">RC Number</h6>
+      <p class="text-muted">{{vendor?.bvn}}</p>
+      <h6 class="my-0">Email Address</h6>
+      <p class="text-muted">{{vendor?.email}}</p>
+      <h6 class="my-0">Phone Number</h6>
+      <p class="text-muted">{{vendor?.businessPhone}}</p>
+      <h6 class="my-0">Bank</h6>
+      <p class="text-muted">{{vendor?.bankName}}</p>
+      <h6 class="my-0">Account Number</h6>
+      <p class="text-muted">{{vendor?.accountNumber}}</p>
+      <h6 class="my-0">Account Name</h6>
+      <p class="text-muted">{{vendor?.businessName}}</p>
+      <div class="text-info"><h6 class="my-0">Status</h6>
+      <p class="text-muted">{{vendor?.status}}</p>
+    </div>
+        <!-- <hr class="mb-4">
+        <button class="login_section_btn"  (click)="EditProfile(vendor)">Edit Profile</button> -->
+      </div>
+    </div>
+        <!-- Total Price -->
+    <div class="col-md-4 mb-4 border-right border-secondary" >
+      <div class="d-block p-2 mb-3 bg-light rounded">
+        <p class="small text-muted mb-0">TOTAL PRODUCTS</p>
+        <h5 class="">N<span>0.00</span></h5>
+        </div>
+        <div class="d-block p-2 mb-3 bg-pink rounded">
+          <p class="small text-muted mb-0">TOTAL REVENUE </p>
+          <h5 class="">N<span>0.00</span></h5>
+          </div>
+          <div class="d-block p-2 mb-3 bg-dark text-white rounded">
+            <p class="small text-muted mb-0">TOTAL PAYOUT</p>
+            <h5 class="">N<span>0.00</span></h5>
+            </div>
+            <div class="d-block py-3 mb-4 bg-white border border-light" >
+              <h6 class="my-0 text-center mb-3 ">Category</h6>
+         
+            <div class="table-responsive">
+          
+              <table class="table">
+                <thead>
+                  <tr>
+          
+                    <th scope="col">Category</th>
+                    <th scope="col">Action</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of vendor?.vendorCategorySubcriptions">
+              
+                    <td><small>{{item.categoryName}}</small></td>
+                      <td>
+                        <div class="custom-control custom-switch">
+                          <input type="checkbox" class="custom-control-input" id="{{item.id}}" (change)="catsub($event, item.id,item.categoryId)" [checked]="item.status">
+                         
+                          <label class="custom-control-label" for="{{item.id}}"></label>
+                        </div>
+                       
+                      </td>
+                    <td><small id="status"> {{item.statusName}}</small></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            </div>
+     
+    </div>
+    
+    <div class="col-md-4 mb-4" id="result">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Coverage Area </span>
+    
+        <span class="badge badge-secondary badge-pill mt-2">{{locCount}}</span>
+      </h4>
+      <hr class="mb-4">
+      <ul class="list-group mb-3" *ngFor="let item of vendor?.vendorLocations">
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div class="row">
+            <div class="col-md-3"><img src="/assets/img/location.svg" width="50"/></div>
+            <div class="col-md-9  mt-2 ">
+            <small class="text-muted">{{item.name}}</small>
+          </div>
+        </div>
+        </li>
+        </ul>
+    </div>
+    </div>
+    </div>
+  </div>
+</div>

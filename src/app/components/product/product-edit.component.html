@@ -1,0 +1,109 @@
+<div class="pawa2_u_dashboard">
+    <div class="pawa2_u_dashboard_section_1">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-xs-6 col-sm-6 col-6">
+            <div class="pawa2_u_dash_title">
+              Assign Delivery
+            </div>
+          </div>
+          <!-- <div class="col-md-6 col-xs-6 col-sm-6 col-6 text-right">
+            <app-quick-menu-component></app-quick-menu-component>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="pawa2_u_dashbaord_section_style_2">
+      <div class="container">
+        <div class="row">
+  
+          <div class="col-md-12">
+            <div class="deliverytime">
+              <p>{{data.deliveryItems[0].deliveryTime}} | {{data.deliveryItems[0]?.scheduledDeliverytime | date}}</p>
+            </div>
+            <div class="">
+              <p>Delivery Items</p>
+              <div>
+                <ul>
+                  <li *ngFor="let item of data.deliveryItems">
+                    <strong>Item:</strong><i>{{item.pickUpItems}},</i>
+                    <strong>Pickup Address:</strong><i>{{item.deliveryLocation.baseAddress}},</i>
+                    <br>
+                    <strong>Delivery Address:</strong><i>{{item.deliveryLocation.targetAddress}}</i>
+                  </li>
+                </ul>
+              </div>
+              <br>
+              <p><strong>Pickup Phone Number:</strong> <i>{{data.deliveryItems[0].pickUpPhone}}</i> </p>
+              <div></div>
+              <p>Image Files</p>
+              <div class="delivery-image">
+                <img *ngFor="let item of data.deliveryItems" src="{{item.imageUrl}}" alt="{{item.pickUpItems}}">
+              </div>
+              
+            </div>
+  <hr>
+            <form [formGroup]="formData" (ngSubmit)="formData.valid && submitForm()">
+                <div class="row">
+                  <div class="col-md-10">
+                      <div class="row">
+                        <div class="col-md-12 mb-4">
+                          <label class="label_ctr">Delivery No *</label>
+                          <input class="form-control form_styler" formControlName="deliveryNo" readonly>
+  
+                        </div>
+                        <input type="hidden" formControlName="deliveryId" readonly>
+                        <div class="col-md-12 mb-4">
+                          <label class="label_ctr">Assign a rider *</label>
+                          <select class="form-control form_styler_select" formControlName="rider">
+                            <option>Select A Rider to Assign </option>
+                            <option *ngFor="let value of riders" [value]="value.appUserId"> {{value.appUser.email}}</option>
+                          </select>
+                          <div class="validate_input" *ngIf="formData.get('rider').hasError('required') && formData.get('rider').touched">
+                            Please select a rider
+                          </div>
+  
+                        </div>
+                        <hr>
+  
+                        <hr>
+  
+                        <hr>
+                        <div class="col-md-12 mb-4">
+                          <hr>
+                          <label class="label_ctr">Delivery Amount</label>
+                          <input class="form-control form_styler"
+                            placeholder="Enter the amount to add to the product price"
+                            formControlName="deliveryAmount" readonly>
+      
+                        </div>
+                        <div class="col-md-12 mb-4">
+                          <label class="label_ctr">Delivery Date</label>
+                          <input class="form-control form_styler" formControlName="deliveryDate" readonly>
+  
+                        </div>
+  
+                        <div class="col-md-12">
+                          <button class="btn btn-small save_btn" [disabled]="formData.invalid || loadingRequest == true">
+  
+                            <div *ngIf="loadingRequest == false; else spinner">
+                              Assign Delivery
+                            </div>
+  
+                            <ng-template #spinner> <mat-spinner  [diameter]="27" class="spinner_loader"></mat-spinner> </ng-template>
+                          </button>
+                        </div>
+   
+                  </div>
+                  <div class="col-md-2">
+  
+                  </div>
+                </div>
+              </div>
+            </form>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  

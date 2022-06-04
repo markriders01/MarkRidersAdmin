@@ -1,0 +1,144 @@
+<div class="pawa2_u_dashboard">
+  <div class="pawa2_u_dashboard_section_1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-xs-6 col-sm-6 col-6">
+          <div class="pawa2_u_dash_title">
+            User Management
+          </div>
+        </div>
+        <div class="col-md-6 col-xs-6 col-sm-6 col-6 text-right">
+          <app-quick-menu-component></app-quick-menu-component>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pawa2_u_dashbaord_section_2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="all_memebers_list">
+            All Users: {{ userCount }}
+          </div>
+        </div>
+
+        <div class="the_selection_bar col-md-12">
+          <div class="row">
+            <div class="col-md-5">
+              <button class="the_sort_header_date" mat-button [matMenuTriggerFor]="sort_date">{{ menutitle }} <span class="mdi mdi-chevron-down change_position_2"></span> </button>
+                  <mat-menu #sort_date="matMenu">
+                    <button mat-menu-item (click)="bulkAction('Bulk Edit', 'bulk_edit')"> Bulk Edit </button>
+                    <button mat-menu-item (click)="bulkAction('Delete', 'bulk_delete')"> Delete </button>
+                    <button mat-menu-item (click)="bulkAction('Deactivate', 'bulk_deactivate')"> Deactivate </button>
+                  </mat-menu>
+            </div>
+            <div class="col-md-7">
+              <div class="row">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-10">
+                  <form>
+                    <div class="row padding_top_small_screen">
+                      <div class="col-md-7 col-7">
+                        <input type="text" class="form-control style_2" placeholder="Search name, email, phone id.">
+                      </div>
+                      <div class="col-md-5 col-5 shift_big_screen">
+                        <button class="btn btn-small btn-primary the_action_btn">Search</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="handle_form_list table-responsive main_tb">
+            <mat-table matTableResponsive class="handle_form_table_list col-md-12 table-responsive table " [dataSource]="dataSource" matSort>
+
+
+ <!-- Checkbox Column -->
+ <ng-container matColumnDef="select">
+  <mat-header-cell *matHeaderCellDef>
+    <mat-checkbox (change)="$event ? masterToggle() : null"
+                  [checked]="selection.hasValue() && isAllSelected()"
+                  [indeterminate]="selection.hasValue() && !isAllSelected()"
+                  [aria-label]="checkboxLabel()">
+    </mat-checkbox>
+  </mat-header-cell>
+  <mat-cell *matCellDef="let row">
+    <mat-checkbox (click)="$event.stopPropagation()"
+                  (change)="$event ? selection.toggle(row) : null"
+                  [checked]="selection.isSelected(row)"
+                  [aria-label]="checkboxLabel(row)">
+    </mat-checkbox>
+  </mat-cell>
+</ng-container>
+
+
+              <!-- status Column -->
+              <ng-container matColumnDef="name" >
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.lastName}} {{element.firstName}} </mat-cell>
+              </ng-container>
+
+              <!-- Amount Column -->
+              <ng-container matColumnDef="email">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="phone">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Phone </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.phoneNumber}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="edit">
+                <mat-header-cell *matHeaderCellDef>Actions </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+
+                  <button (click)="runAction('edit', row.id)" mat-icon-button matTooltip="Click to Edit" class="btn btn-small custom_btn btn-green-color">
+                    Edit
+                </button>
+
+                </mat-cell>
+              </ng-container>
+
+              <!-- <ng-container matColumnDef="deactivate">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let row">
+
+                  <button *ngIf="row.isActive == false; else condition" (click)="runAction('activate', row.id)" mat-icon-button matTooltip="Click to Activate"
+                  class="btn btn-small custom_btn btn-green-color">
+                  Activate
+                </button>
+
+                <ng-template #condition>
+                  <button (click)="runAction('deactivate', row.id)" mat-icon-button matTooltip="Resolved"
+                    class="btn btn-small custom_btn btn-red-color">
+                    Deactivate
+                  </button>
+                </ng-template>
+
+                </mat-cell>
+              </ng-container> -->
+
+              <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+            </mat-table>
+
+
+
+            <mat-paginator class="mat-paginator-container-pg" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons>
+            </mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

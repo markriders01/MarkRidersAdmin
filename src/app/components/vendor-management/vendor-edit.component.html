@@ -1,0 +1,192 @@
+<div class="pawa2_u_dashboard">
+  <div class="pawa2_u_dashboard_section_1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-xs-6 col-sm-6 col-6">
+          <div class="pawa2_u_dash_title">
+            Create Vendor
+          </div>
+        </div>
+        <div class="col-md-6 col-xs-6 col-sm-6 col-6 text-right">
+          <!-- <app-quick-menu-component></app-quick-menu-component> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pawa2_u_dashbaord_section_style_2">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-12">
+
+          <form [formGroup]="formData" (ngSubmit)="submitForm()">
+            <div class="row">
+              <div class="col-md-10">
+                <div class="row">
+                  <!-- <div class="col-md-6 mb-4">
+                    <input placeholder="First Name" class="form-control form_styler" formControlName="adminFirstName">
+
+                    <div class="validate_input"
+                      *ngIf="formData.get('adminFirstName').hasError('required') && formData.get('adminFirstName').touched">
+                      First Name is required
+                    </div>
+
+                  </div> -->
+
+                  <hr>
+
+                  <!-- <div class="col-md-6 mb-4">
+                    <input class="form-control form_styler" placeholder="Last name" formControlName="adminLastName">
+                    <div class="validate_input"
+                      *ngIf="formData.get('adminLastName').hasError('required') && formData.get('adminLastName').touched">
+                      Last Name is required
+                    </div>
+                  </div> -->
+
+                  <div class="col-md-6">
+                    <input formControlName="businessEmail" type="email" class="form-control form_styler" placeholder="Email">
+                    <div class="validate_input"
+                      *ngIf="formData.get('businessEmail').hasError('required') && formData.get('businessEmail').touched">
+                      Email is required
+                    </div>
+                    <div class="validate_input" *ngIf="formData.get('businessEmail').hasError('pattern')">
+                      Please enter a valid email address
+                    </div>
+                    <div class="validate_input" *ngIf="formData.get('businessEmail').hasError('maxLength')">
+                      Please enter a valid email address
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-6 mb-4">
+                    <input class="form-control form_styler" type="number" placeholder="Mobile" formControlName="phone">
+                    <div class="validate_input"
+                      *ngIf="formData.get('phone').hasError('required') && formData.get('phone').touched">
+                      Mobile Number is required
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 mb-4">
+                    <input class="form-control form_styler" placeholder="Company name" formControlName="businessName">
+                    <div class="validate_input"
+                      *ngIf="formData.get('businessName').hasError('required') && formData.get('businessName').touched">
+                      Company Name is required
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6 mb-4">
+                    <input class="form-control form_styler" placeholder="Address" formControlName="businessAddress">
+                    <div class="validate_input"
+                      *ngIf="formData.get('businessAddress').hasError('required') && formData.get('businessAddress').touched">
+                      Address is required
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 mb-4">
+                    <input class="form-control form_styler" type="number" placeholder="BVN" formControlName="bvn">
+                    <div class="validate_input"
+                      *ngIf="formData.get('bvn').hasError('required') && formData.get('bvn').touched">
+                      BVN
+                    </div>
+                  </div>
+
+
+                  <!-- <div class="col-md-6 mb-4">
+                    <input class="form-control form_styler" placeholder="Account name" formControlName="account_name">
+                    <div class="validate_input"
+                      *ngIf="formData.get('account_name').hasError('required') && formData.get('account_name').touched">
+                      Account Name
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 mb-4">
+                    <input class="form-control form_styler" placeholder="Account number"
+                      formControlName="account_number">
+                    <div class="validate_input"
+                      *ngIf="formData.get('account_number').hasError('required') && formData.get('account_number').touched">
+                      Account Number
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 mb-4">
+                    <div class="form_title_without_lable">
+                      Select Category
+                    </div>
+
+                    <div class="group_checkbox">
+                      <div class="group_checkbox_inner">
+                        <input id="diesel_checkbox" formControlName="select_category" type="checkbox">
+                        <label for="diesel_checkbox" class="the_group_select">Diesel</label>
+                      </div>
+
+                      <div class="group_checkbox_inner">
+                        <input id="kerosene_checkbox" type="checkbox" formControlName="select_category">
+                        <label for="kerosene_checkbox" class="the_group_select">Kerosene</label>
+                      </div>
+
+                      <div class="group_checkbox_inner">
+                        <input id="generator_checkbox" type="checkbox" formControlName="select_category">
+                        <label for="generator_checkbox" class="the_group_select">Generator</label>
+                      </div>
+
+                      <div class="group_checkbox_inner">
+                        <input id="inverter_checkbox" type="checkbox" formControlName="select_category">
+                        <label for="inverter_checkbox" class="the_group_select">Inverter</label>
+                      </div>
+
+                      <div class="group_checkbox_inner">
+                        <input id="solar_panel_checkbox" type="checkbox" formControlName="select_category">
+                        <label for="solar_panel_checkbox" class="the_group_select">Solar panel</label>
+                      </div>
+
+                      <div class="group_checkbox_inner">
+                        <input id="jet_fuel_checkbox" type="checkbox" formControlName="select_category">
+                        <label for="jet_fuel_checkbox" class="the_group_select">Jet Fuel</label>
+                      </div>
+                    </div>
+
+                    <div class="validate_input" *ngIf="formData.get('select_category').hasError('required') && formData.get('select_category').touched">
+                      Please select category
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-12 mb-4">
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01"
+                          aria-describedby="inputGroupFileAddon01" formControlName="vendor_logo">
+                        <label class="custom-file-label label_ctr_file" for="inputGroupFile01">Upload company or vendor
+                          logo</label>
+                        <div class="validate_input"
+                          *ngIf="formData.get('vendor_logo').hasError('required') && formData.get('vendor_logo').touched">
+                          Company name is required
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+
+                  <div class="col-md-12">
+                    <button class="btn btn-small save_btn">
+                      <div *ngIf="loadingRequest == false; else spinner">
+                       Edit vendor
+                      </div>
+
+                      <ng-template #spinner>
+                        <mat-spinner [diameter]="27" class="spinner_loader"></mat-spinner>
+                      </ng-template>
+                    </button>
+                  </div>
+
+                </div>
+                <div class="col-md-2">
+
+                </div>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>

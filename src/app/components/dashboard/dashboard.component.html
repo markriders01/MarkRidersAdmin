@@ -1,0 +1,165 @@
+<div class="pawa2_u_dashboard">
+  <div class="pawa2_u_dashboard_section_1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-xs-6 col-sm-6 col-6">
+          <div class="pawa2_u_dash_title">
+            Dashboard
+          </div>
+        </div>
+        <div class="col-md-6 col-xs-6 col-sm-6 col-6 text-right">
+          <app-quick-menu-component></app-quick-menu-component>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pawa2_u_dashbaord_section_2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+
+        </div>
+        <div class="col-md-6">
+          <div class="pawa2_u_dashbaord_section_2">
+
+          </div>
+
+        </div>
+
+        <div class="handle_month_filter col-md-12">
+          <div class="row">
+            <div class="col-md-8">
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-7 col-7 align-right">
+                  <div class="the_date_text">Date Range</div>
+                </div>
+                <div class="col-md-5 col-5">
+                  <button class="the_sort_header_date" mat-button [matMenuTriggerFor]="sort_date">{{ menu_title }} <span class="mdi mdi-chevron-down change_position_2"></span> </button>
+                  <mat-menu #sort_date="matMenu">
+                    <button mat-menu-item (click)="sortBy('30 Days', '30')"> 30 Days </button>
+                    <button mat-menu-item (click)="sortBy('10 Days', '10')"> 10 Days</button>
+                    <button mat-menu-item (click)="sortBy('5 Days', '5')"> 5 Days</button>
+                    <button mat-menu-item (click)="sortBy('Today', '1')"> Today </button>
+                  </mat-menu>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="handle_dotted_title col-md-12">
+          <div class="handle_dotted_title_inner">
+            <span class="handle_title_span">Performance</span>
+          </div>
+        </div>
+
+        <div class="item_counters col-md-12">
+          <div class="row">
+
+            <div class="col-md-3">
+              <div class="item_counter_list gray">
+                <div class="item_counter_title">
+                  Gross Revenue
+                </div>
+                <div class="item_counter_title_price">
+                  {{reportdto.grossRevenure | currency:'₦':true:'3.2-2'}}
+                  <!-- {{reportdto?.grossAmount | currency:'₦':true:'3.2-2'}} -->
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="item_counter_list pink">
+                <div class="item_counter_title">
+                  Net Revenue
+                </div>
+                <div class="item_counter_title_price">
+                  {{reportdto.grossRevenure | currency:'₦':true:'3.2-2'}}
+                  <!-- {{reportdto?.netAmount | currency:'₦':true:'3.2-2'}} -->
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="item_counter_list gray">
+                <div class="item_counter_title">
+                  Delivery Count
+                </div>
+                <div class="item_counter_title_price">
+                  <!-- {{reportdto?.orderCount}} -->
+                  {{reportdto.deliveryCount}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="item_counter_list blue">
+                <div class="item_counter_title">
+                  Top Rider Account
+                </div>
+                <div class="item_counter_title_price">
+                  <!-- {{reportdto?.topCategory}} -->
+                  {{reportdto.topRider}}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- <div class="handle_dotted_title col-md-12 mt-15_spaned">
+          <div class="handle_dotted_title_inner">
+            <span class="handle_title_span">Performance Chart</span>
+          </div>
+        </div>
+
+        <div class="chart_graph">
+          <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+            [legend]="barChartLegend" [chartType]="barChartType">
+          </canvas>
+
+        </div> -->
+
+
+        <div class="handle_dotted_title col-md-12 mt-10 mb-5 mt-5">
+          <div class="handle_dotted_title_inner">
+            <span class="handle_title_span">Riders Deliveries</span>
+          </div>
+        </div>
+
+        <div class="handle_form_list col-md-12 table-responsive">
+          <mat-table matTableResponsive class="handle_form_table_list col-md-12" [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="Email">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="DeliveryCount">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Delivery Count </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.deliveryCount}} deliveries completed </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Details">
+              <mat-header-cell *matHeaderCellDef>Actions </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+
+                <button (click)="runAction('details', row.userId)" mat-icon-button matTooltip="Click to view more" class="btn btn-small custom_btn btn-green-color">
+                  View Details
+              </button>
+
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+
+          <mat-paginator class="mat-paginator-container-pg" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons>
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

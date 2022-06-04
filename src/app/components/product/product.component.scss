@@ -1,0 +1,27 @@
+.btn-primary-color{
+    background-color: rgb(9, 98, 150);
+    color: white;
+}
+.delivery-image{
+    display: flex;
+    flex-direction: row;
+    height: 150px;
+    width: 100px;
+    margin-bottom: 40px;
+}
+.delivery-image img{
+    object-fit: contain;
+    margin: 5px;
+}
+.deliverytime{
+    background-color: #ce9f05;
+    border-radius: 10px;
+    padding: 5px;
+    color: #fff;
+    width: 250px;
+    height: auto;
+}
+.deliverytime p{
+    margin-top: 10px;
+    justify-content: center;
+}

@@ -1,0 +1,158 @@
+<div class="pawa2_u_dashboard">
+  <div class="pawa2_u_dashboard_section_1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-xs-6 col-sm-6 col-6">
+          <div class="pawa2_u_dash_title">
+            Dispute Rider
+          </div>
+        </div>
+        <div class="col-md-6 col-xs-6 col-sm-6 col-6 text-right">
+          <app-quick-menu-component></app-quick-menu-component>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pawa2_u_dashbaord_section_style_2">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-12">
+
+          <form [formGroup]="formData" (ngSubmit)="formData.valid && submitForm()">
+              <div class="row">
+                <div class="col-md-10">
+                    <div class="row">
+                      <div class="col-md-12 mb-4">
+                        <label class="label_ctr">Name *</label>
+                        <input class="form-control form_styler" formControlName="productName">
+
+                        <div class="validate_input" *ngIf="formData.get('productName').hasError('required') && formData.get('productName').touched">
+                          Product name is required
+                        </div>
+
+                      </div>
+
+                      <hr>
+
+                      <div class="col-md-12 mb-4">
+                        <label class="label_ctr">Description *</label>
+                        <textarea class="form-control form_styler"  formControlName="description"></textarea>
+
+                        <div class="validate_input" *ngIf="formData.get('description').hasError('required') && formData.get('description').touched">
+                          Product description is required
+                        </div>
+                      </div>
+
+
+                      <!-- <div class="col-md-12 mb-4">
+                        <label class="label_ctr">Product image</label>
+                        <div class="input-group">
+                          <div class="custom-file">
+                            <input  formControlName="productImage" type="file" class="custom-file-input" id="inputGroupFile01"
+                              aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label label_ctr_file" for="inputGroupFile01">Upload category  image   500 x 400 PX</label>
+                          </div>
+                        </div>
+
+                        <div class="validate_input" *ngIf="formData.get('productImage').hasError('required') && formData.get('productImage').touched">
+                          Product image is required
+                        </div>
+
+                      </div> -->
+                      <div class="col-md-12 mb-4">
+                        <label class="label_ctr">Vendor *</label>
+                        <select class="form-control form_styler_select" formControlName="businessId">
+                          <option>Select Product Category</option>
+                          <option *ngFor="let value of this.vendors" [value]="value.id"> {{value.businessName}}</option>
+                        </select>
+                        <div class="validate_input" *ngIf="formData.get('businessId').hasError('required') && formData.get('businessId').touched">
+                          Please select a vendor
+                        </div>
+
+                      </div>
+                      <div class="col-md-12 mb-4">
+                        <label class="label_ctr">Category *</label>
+                        <select class="form-control form_styler_select" formControlName="categoryId"  #mySelect
+                        (change)='checkcattype(mySelect.value)'>
+                          <option>Select Product Category</option>
+                          <option *ngFor="let value of this.categories" [value]="value.id"> {{value.categoryName}}</option>
+                        </select>
+
+                        <div class="validate_input" *ngIf="formData.get('categoryId').hasError('required') && formData.get('categoryId').touched">
+                          Please select a product category is required
+                        </div>
+
+                      </div>
+
+                      <!-- <div *ngIf="this.isCatOveridePrice" class="col-md-12 mb-4">
+                        <label class="label_ctr">Vendor Fee *</label>
+                        <input class="form-control form_styler" formControlName="vendorFee" (change)='changeVendorFee()'>
+
+                        <div class="validate_input" *ngIf="formData.get('vendorFee').hasError('required') && formData.get('vendorFee').touched">
+                          Vendor Fee
+                        </div>
+
+                      </div>
+                      <div *ngIf="this.isCatOveridePrice" class="col-md-12 mb-4">
+                        <label class="label_ctr">Depot Fee *</label>
+                        <input class="form-control form_styler" formControlName="depotPrice" (change)='changeDepotFee()'>
+
+                        <div class="validate_input" *ngIf="formData.get('depotPrice').hasError('required') && formData.get('depotPrice').touched">
+                          Depot Fee
+                        </div>
+
+                      </div> -->
+
+                      <hr>
+
+                      <hr>
+
+                      <hr>
+                      <div class="col-md-12 mb-4">
+                        <hr>
+                        <label class="label_ctr">Product Price</label>
+                        <input class="form-control form_styler"
+                          placeholder="Enter the amount to add to the product price"
+                          formControlName="categoryProductPrice">
+    
+                        <div class="validate_input"
+                          *ngIf="formData.get('categoryProductPrice').hasError('required') && formData.get('categoryProductPrice').touched">
+                          This filed is required
+                        </div>
+    
+                      </div>
+                      <div class="col-md-12 mb-4">
+                        <label class="label_ctr">Quantity in stock</label>
+                        <input class="form-control form_styler" formControlName="quantity">
+
+
+                        <div class="validate_input" *ngIf="formData.get('quantity').hasError('required') && formData.get('quantity').touched">
+                          This field is required
+                        </div>
+
+                      </div>
+
+                      <div class="col-md-12">
+                        <button class="btn btn-small save_btn" [disabled]="formData.invalid || loadingRequest == true">
+
+                          <div *ngIf="loadingRequest == false; else spinner">
+                            Create product
+                          </div>
+
+                          <ng-template #spinner> <mat-spinner  [diameter]="27" class="spinner_loader"></mat-spinner> </ng-template>
+                        </button>
+                      </div>
+
+                </div>
+                <div class="col-md-2">
+
+                </div>
+              </div>
+            </div>
+          </form>
+
+      </div>
+    </div>
+  </div>
+</div>

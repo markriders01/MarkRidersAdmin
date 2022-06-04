@@ -1,0 +1,128 @@
+<div class="pawa2_u_dashboard">
+  <div class="pawa2_u_dashboard_section_1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-xs-6 col-sm-6 col-6">
+          <div class="pawa2_u_dash_title">
+            Add Admin User
+          </div>
+        </div>
+        <div class="col-md-6 col-xs-6 col-sm-6 col-6 text-right">
+          <app-quick-menu-component></app-quick-menu-component>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pawa2_u_dashbaord_section_style_2">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-12">
+          <form [formGroup]="formData" (ngSubmit)="formData.valid && submitForm()">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <input class="form-control form_styler" placeholder="First name" formControlName="firstName">
+
+                    <div class="validate_input" *ngIf="formData.get('firstName').hasError('required') && formData.get('firstName').touched">
+                      First name is required
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-6 mb-4">
+                    <input class="form-control form_styler" placeholder="Last name" formControlName="lastName">
+
+                    <div class="validate_input" *ngIf="formData.get('lastName').hasError('required') && formData.get('lastName').touched">
+                      Last name is required
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 mb-4">
+                    <input class="form-control form_styler" type="email" placeholder="email" formControlName="email">
+                    <div class="validate_input" *ngIf="formData.get('email').hasError('required') && formData.get('email').touched">
+                      Email is required
+                    </div>
+                    <div class="validate_input" *ngIf="formData.get('email').hasError('pattern')">
+                      Must be a valid email address. eg. admin@markriders.com
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 mb-4">
+                    <input class="form-control form_styler" type="text" placeholder="Phone" formControlName="phone">
+                    <div class="validate_input" *ngIf="formData.get('phone').hasError('required') && formData.get('phone').touched">
+                      Phone is required
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 mb-4">
+                    <label class="label_ctr">Address</label>
+                    <input class="form-control form_styler" type="text" placeholder="Address" formControlName="address">
+                    <div class="validate_input" *ngIf="formData.get('address').hasError('required') && formData.get('address').touched">
+                      Address is required
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <label class="label_ctr">Gender</label>
+                    <select class="form-control form_styler_select" formControlName="gender">
+                      <option>Select Gender </option>
+                      <option [value]="1">Male</option>
+                      <option [value]="2">Female</option>
+                    </select>
+                    <div class="validate_input" *ngIf="formData.get('gender').hasError('required') && formData.get('gender').touched">
+                      Please select gender
+                    </div>
+
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <label class="label_ctr">Country</label>
+                    <select class="form-control form_styler_select" formControlName="country">
+                      <option>Select Country </option>
+                      <option *ngFor="let value of countries" [value]="value.id"> {{value.name}}</option>
+                    </select>
+                    <div class="validate_input" *ngIf="formData.get('country').hasError('required') && formData.get('country').touched">
+                      Please select country
+                    </div>
+
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <label class="label_ctr">State</label>
+                    <select class="form-control form_styler_select" formControlName="state">
+                      <option>Select State </option>
+                      <option *ngFor="let value of states" [value]="value.id"> {{value.name}}</option>
+                    </select>
+                    <div class="validate_input" *ngIf="formData.get('state').hasError('required') && formData.get('state').touched">
+                      Please select state
+                    </div>
+
+                  </div>
+                  <div class="col-md-12 mb-4">
+                    <input class="form-control form_styler" placeholder="Password" type="password" formControlName="password">
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <button class="btn btn-small save_btn" [disabled]="formData.invalid || loadingRequest == true">
+                      <div *ngIf="loadingRequest == false; else spinner">
+                       Add Admin User
+                      </div>
+
+                      <ng-template #spinner>
+                        <mat-spinner [diameter]="27" class="spinner_loader"></mat-spinner>
+                      </ng-template>
+                    </button>
+
+
+                  </div>
+
+                </div>
+                <div class="col-md-4">
+
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

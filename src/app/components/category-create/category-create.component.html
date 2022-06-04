@@ -1,0 +1,280 @@
+<div class="pawa2_u_dashboard">
+  <div class="pawa2_u_dashboard_section_1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-xs-6 col-sm-6 col-6">
+          <div class="pawa2_u_dash_title">
+            Create category
+          </div>
+        </div>
+        <div class="col-md-6 col-xs-6 col-sm-6 col-6">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pawa2_u_dashbaord_section_style_2">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-12">
+
+          <div class="row">
+            <div class="col-md-10">
+
+              <form [formGroup]="formData" (ngSubmit)="submitForm()">
+                <div class="row">
+                  <div class="col-md-12 mb-4">
+                    <label class="label_ctr">Category Title</label>
+                    <input class="form-control form_styler" formControlName="categoryName">
+                    <div class="validate_input"
+                      *ngIf="formData.get('categoryName').hasError('required') && formData.get('categoryName').touched">
+                      This filed is required
+                    </div>
+                  </div>
+                  <div class="col-md-12 mb-4">
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-3 col-12">
+                        <div class="checkbox_text" style="line-height: 33px;">Owners Product</div>
+                      </div>
+                      <div class="col-md-1 col-1">
+                        <input type="checkbox" class="form-control style_checkbox" (change)="ownerpr($event)" formControlName="ownerProduct">
+                      </div>
+                      <div class="col-md-8 col-11">
+                        <div class="checkbox_text">
+                          Check this box if you don’t want vendors to post products into this category.
+                          This category will automatically create a product with the category name.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="validate_input"
+                      *ngIf="formData.get('ownerProduct').hasError('required') && formData.get('ownerProduct').touched">
+                      This filed is required
+                    </div>
+                    <hr>
+                  </div>
+                  <div class="col-md-12 mb-4">
+                    <label class="label_ctr">Description</label>
+                    <textarea class="form-control form_styler" formControlName="categoryDescription"></textarea>
+                    <div class="validate_input"
+                      *ngIf="formData.get('categoryDescription').hasError('required') && formData.get('categoryDescription').touched">
+                      This filed is required
+                    </div>
+                  </div>
+                  <div class="col-md-12 mb-4">
+                        <label class="label_ctr">Category image</label>
+                        <div class="input-group">
+                          <div class="custom-file">
+                            <input  type="file" #file class="custom-file-input" (change)= "uploadfile(file.files)"
+                            aria-describedby="inputGroupFileAddon01">
+                            <!-- <input type="file" class="custom-file-input" id="inputGroupFile01"
+                              aria-describedby="inputGroupFileAddon01" formControlName="avatar" (input)="handleFileInput($event.target.files)"> -->
+                            <label class="custom-file-label label_ctr_file" for="inputGroupFile01">Upload category  image   500 x 400 PX</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <hr>
+                        <label class="label_ctr">MacUp Fee Type</label>
+                        <select class="form-control form_styler_select" formControlName="macupfeetype"  #mySelect
+                        (change)='checkcattype(mySelect.value)'>
+                          <option>Select MacUp Fee Type</option>
+                          <option *ngFor="let value of this.macupfees" [value]="value.id"> {{value.name}}</option>
+                        </select>
+    
+                        <div class="validate_input"
+                          *ngIf="formData.get('categoryTypeId').hasError('required') && formData.get('categoryTypeId').touched">
+                          Please select a product category is required
+                        </div>
+    
+                      </div>
+                  <div class="col-md-12 mb-4">
+                    <hr>
+                    <label class="label_ctr">Mac up price</label>
+                    <input class="form-control form_styler"
+                      placeholder="Enter the amount to add to the product price in this category"
+                      formControlName="categoryMarkUpFee">
+
+                    <div class="validate_input"
+                      *ngIf="formData.get('categoryMarkUpFee').hasError('required') && formData.get('categoryMarkUpFee').touched">
+                      This filed is required
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-12">
+                    <label class="label_ctr">Pricing Style *</label>
+                    <select class="form-control form_styler_select" formControlName="categoryPricingStyleId">
+                      <option>Select Product Category</option>
+                      <option *ngFor="let value of this.categoryPricingStyle" [value]="value.id"> {{value.name}}
+                      </option>
+
+                    </select>
+
+                    <div class="validate_input"
+                      *ngIf="formData.get('categoryPricingStyleId').hasError('required') && formData.get('categoryPricingStyleId').touched">
+                      Please select a product category is required
+                    </div>
+
+                  </div>
+
+
+                  <div class="col-md-12">
+
+                    <label class="label_ctr">Order increment</label>
+                    <input class="form-control form_styler" placeholder="Default to 1 if no number is inserted"
+                      formControlName="incrementNumber">
+
+                    <div class="validate_input"
+                      *ngIf="formData.get('incrementNumber').hasError('required') && formData.get('incrementNumber').touched">
+                      This filed is required
+                    </div>
+
+
+                  </div>
+                  <div class="col-md-12 mb-4">
+                    <hr>
+                    <label class="label_ctr">Category Type</label>
+                    <select class="form-control form_styler_select" formControlName="categoryTypeId"  #mySelect
+                    (change)='checkcattype(mySelect.value)'>
+                      <option>Select Product Category</option>
+                      <option *ngFor="let value of this.categoryTypes" [value]="value.id"> {{value.name}}</option>
+                    </select>
+
+                    <div class="validate_input"
+                      *ngIf="formData.get('categoryTypeId').hasError('required') && formData.get('categoryTypeId').touched">
+                      Please select a product category is required
+                    </div>
+
+                  </div>
+                  
+
+                  <div class="col-md-12 mb-4" *ngIf="allowoveride">
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="checkbox_text" style="line-height: 33px;">Overide product price</div>
+                      </div>
+                      <div class="col-md-1 col-1">
+                        <input type="checkbox" class="form-control style_checkbox" (change)="overideprice($event)"
+                          formControlName="categoryOveridePrice">
+                      </div>
+                      <div class="col-md-8 col-11">
+                        <div class="checkbox_text">
+                          If checked the value entered here will override the price entered by vendors for the products
+                          posted in this category
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                  </div>
+                 
+                  <div class="col-md-12 hide">
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="checkbox_text" style="line-height: 33px;">Order Flow</div>
+                      </div>
+                      <div *ngFor="let value of this.orderflow" class="col-md-4 col-6">
+                        <div class="row">
+                          <div class="col-md-2 col-2">
+                            <input id="order_flow" type="radio" class="form-control" [value]="value.id"
+                              formControlName="orderFlowId" style="width: 30px;">
+                          </div>
+                          <div class="col-md-10 col-8">
+                            <label class="checkbox_text pt-2">{{value.name}}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-1"></div>
+                    </div>
+                    <hr>
+                  </div>
+
+                  <!-- <div class="row">
+                          <div class="col-md-3">
+                           <div class="checkbox_text" style="line-height: 33px;">Category Type</div>
+                          </div>
+                          <div class="col-md-3 col-6">
+                            <div class="row">
+                              <div class="col-md-2 col-2">
+                                <input id="category_type" type="radio" class="form-control" value="fuel" formControlName="category_type">
+                              </div>
+                              <div class="col-md-10 col-8">
+                                <label class="checkbox_text pt-2">Fuel</label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-3 col-6">
+                            <div class="row">
+                              <div class="col-md-2 col-2">
+                                <input id="category_type" type="radio" class="form-control" value="equipment" formControlName="category_type">
+                              </div>
+                              <div class="col-md-10 col-8">
+                                <label class="checkbox_text pt-2">Equipment</label>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-3">
+
+                          </div>
+                        </div> -->
+                        <div class="col-md-12 mb-4" *ngIf="isownerpro">
+                          <hr>
+                          <label class="label_ctr">Product Price</label>
+                          <input class="form-control form_styler"
+                            placeholder="Enter the amount to add to the product price in this category"
+                            formControlName="productPrice">
+      
+                          <div class="validate_input"
+                            *ngIf="formData.get('productPrice').hasError('required') && formData.get('productPrice').touched">
+                            This filed is required
+                          </div>
+      
+                        </div>
+                  <div *ngIf="this.isfuelcat"  class="col-md-12 mb-4">
+                    <div class="checkbox_bg_layout">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label>Depot price</label>
+                          <input type="text" class="form-control form_styler" formControlName="depotPrice">
+                        </div>
+
+                        <div class="col-md-4">
+                          <label>Vendor price</label>
+                          <input type="text" class="form-control form_styler" formControlName="vendorFee">
+                        </div>
+
+                        <div class="col-md-4">
+                          <label>Minimum order</label>
+                          <input type="text" class="form-control form_styler" formControlName="minimumOrder">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <!-- <div class="col-md-12">
+                    <button class="btn btn-small save_btn">Create category</button>
+                  </div> -->
+                  <div class="col-md-12">
+                    <button [disabled]="loadingRequest == true" matRipple class="login_section_btn">
+                      <div *ngIf="loadingRequest == false; else spinner">
+                        Create category
+                      </div>
+
+                      <ng-template #spinner> <mat-spinner  [diameter]="27" class="spinner_loader"></mat-spinner> </ng-template>
+                    </button>
+                  </div>
+                </div>
+              </form>
+              <div class="col-md-2">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
